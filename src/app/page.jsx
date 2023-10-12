@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Home() {
   return (
     <div>
@@ -6,7 +8,7 @@ export default function Home() {
       <div>
         <figure>
           <figure>
-            <Image src="/public/img/promocao.jpg" alt="Promocao" width={300} height={188}/>
+            <Image src="/img/promocao.jpg" alt="Promocao" width={640} height={464}/>
           </figure>
         </figure>
       </div>
