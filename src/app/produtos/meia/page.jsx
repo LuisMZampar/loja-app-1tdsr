@@ -10,7 +10,7 @@ export default function Meia() {
                     <Image src="/img/feet-932346_1280.jpg" alt="Meia" width={320} height={188} />
                 </figure>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, doloremque!</p>
-                <p>Voltar...</p>
+                <p><Link href="/">Voltar...</Link></p>
             </div>
         </div>
     )
