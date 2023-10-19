@@ -1,10 +1,9 @@
-import React from "react";
 
-export default function CalçaLayout({ children }) {
+export default function CalcaLayout({ children }) {
   return (
     <div>
-        <h1>PARAISO DOS CALÇAS</h1>
-        {children}
+        <h1>PARAISO DAS CALÇAS</h1>
+            {children}
         <h2>DE TODOS OS TAMANHOS</h2>
     </div>
   )
