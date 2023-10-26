@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Link from 'next/link';
 
-export default function Camisa() {
+export default async function Camisa({params}) {
+
+    const response = await fetch("http://localhost:3000/api/vestuario/camisa")
+
     return (
         <div>
             <h1>CAMISA</h1>
