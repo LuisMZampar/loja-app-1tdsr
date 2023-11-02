@@ -1,44 +1,41 @@
-import { promises as fs } from "fs";
+import {promises as fs} from "fs"
 import { NextResponse } from "next/server";
 
-const file = await fs.readFile(
-  process.cwd() + "/src/app/api/base/data.json",
-  "utf8"
-);
+const file = await fs.readFile(process.cwd() + "/src/app/api/base/data.json", "utf8");
 
-export async function GET() {
-  //PARSEANDO A BASE DE DADOS DOS USUARIOS
-  const body = JSON.parse(file);
+export async function GET(){
 
-  //RETORNADNO UM STATUS
-  return NextResponse.json(body);
-}
+    //PARSEANDO A BASE DE DADOS DOS USUÁRIOS
+    const body = JSON.parse(file);
 
-const handleLogin = async (email, senha) => {
-  const body = await JSON.parse(file);
-
-  //Sistema de validacao de login, retornando um usuario, ou undefined caso não encontre
-  const usuarioValidado = body.usuarios.find((user) => user.email == email && user.senha == senha)
-
-  return usuarioValidado;
+    //RETORNANDO UM STATUS.
+    return NextResponse.json(body); 
 
 }
 
-export async function POST(request, response) {
 
-  //RECEBENDO OS DADOS ENVIADOS MA REQUISIÇÃO
-  const { email, senha } = await request.json();
+const handleLogin = async (email,senha) => {
+    const body = await JSON.parse(file);
 
-  //Validando login
-  //uv = Usuario validado
-  const uv = await handleLogin(email, senha);
+    //Sistema de validação de login, retornando um usuário válido, ou undefined caso não encontre.    
+    const usuarioValidado = body.usuarios.find((user) => user.email == email && user.senha == senha);
 
-  //Caso usuario seja valido, retorna true, caso contrario, retorna false
-  if (uv) {
-    return NextResponse.json({ "status": true })
-  }
-
-  return NextResponse.json({ "error": false });
+    return usuarioValidado;
+}
 
 
+export async function POST(request,response){
+
+    //RECEBENDO OS DADOS ENVIADOS NA REQUISIÇÃO!
+    const {email,senha} = await request.json();
+
+    //VALIDANDO O LOGIN
+    const uv = await handleLogin(email,senha);
+
+    //CASO O USUÁRIO SEJA VÁLIDO, RETORNA TRUE, CASO CONTRÁRIO, RETORNA FALSE.
+    if(uv){
+        return NextResponse.json({"status":true});
+    }
+
+    return NextResponse.json({"status":false});
 }
