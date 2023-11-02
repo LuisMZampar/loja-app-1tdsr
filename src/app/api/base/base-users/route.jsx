@@ -14,20 +14,31 @@ export async function GET() {
   return NextResponse.json(body);
 }
 
-export async function POST(request, response) {
-  //RECEBENDO OS DADOS ENVIADOS MA REQUISIÇÃO
-  const usuario = await request.json();
-
+const handleLogin = async (email, senha) => {
   const body = await JSON.parse(file);
 
-  for (let x = 0; x < body.usuarios; x++) {
-    const u = body.usuarios[x];
+  //Sistema de validacao de login, retornando um usuario, ou undefined caso não encontre
+  const usuarioValidado = body.usuarios.find((user) => user.email == email && user.senha == senha)
 
-    if (u.email == usuario.email && u.senha == usuario.senha) {
-      //RETORNO DA REQUISIÇÃO
-      return NextResponse.json({ status: "ok" });
-    }
+  return usuarioValidado;
+
+}
+
+export async function POST(request, response) {
+
+  //RECEBENDO OS DADOS ENVIADOS MA REQUISIÇÃO
+  const { email, senha } = await request.json();
+
+  //Validando login
+  //uv = Usuario validado
+  const uv = await handleLogin(email, senha);
+
+  //Caso usuario seja valido, retorna true, caso contrario, retorna false
+  if (uv) {
+    return NextResponse.json({ "status": true })
   }
 
-  return NextResponse.json({ status: "error" });
+  return NextResponse.json({ "error": false });
+
+
 }
