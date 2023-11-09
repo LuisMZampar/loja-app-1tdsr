@@ -34,7 +34,7 @@ export async function POST(request,response){
 
     //CASO O USUÁRIO SEJA VÁLIDO, RETORNA TRUE, CASO CONTRÁRIO, RETORNA FALSE.
     if(uv){
-        return NextResponse.json({"status":true});
+        return NextResponse.json({"status":true, "usuario":uv});
     }
 
     return NextResponse.json({"status":false});
