@@ -1,13 +1,12 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Cabecalho() {
   const usuario = JSON.parse(sessionStorage.getItem("obj-user"));
   const [userLogado] = useState(usuario);
-  
-  if (sessionStorage.getItem("token-user")) {
 
+  if (sessionStorage.getItem("token-user")) {
 
     const handleLogout = () => {
       sessionStorage.removeItem("token-user");
@@ -18,6 +17,7 @@ export default function Cabecalho() {
     return (
       <div>
         <header className="bg-gray-800 text-white p-2">
+
           <nav className="p-linha ">
             <p>
               <Link href="/" onClick={handleLogout}>LOGOUT</Link>
@@ -36,7 +36,7 @@ export default function Cabecalho() {
             </p>
           </nav>
           <div>
-            <p>{userLogado.nome} - {userLogado.email}</p>
+            {userLogado && <p>{userLogado.nome} - {userLogado.email}</p>}
           </div>
         </header>
       </div>
@@ -53,5 +53,6 @@ export default function Cabecalho() {
         </header>
       </div>
     );
+
   }
 }

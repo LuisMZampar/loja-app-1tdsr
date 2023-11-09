@@ -27,15 +27,30 @@ const handleLogin = async (email,senha) => {
 export async function POST(request,response){
 
     //RECEBENDO OS DADOS ENVIADOS NA REQUISIÇÃO!
-    const {email,senha} = await request.json();
+    const {id, nome, email,senha, info} = await request.json();
 
-    //VALIDANDO O LOGIN
-    const uv = await handleLogin(email,senha);
+    if(info == "login"){
+        //VALIDANDO O LOGIN
+        const uv = await handleLogin(email,senha);
+    
+        //CASO O USUÁRIO SEJA VÁLIDO, RETORNA TRUE, CASO CONTRÁRIO, RETORNA FALSE.
+        if(uv){
+            return NextResponse.json({"status":true,"usuario":uv});
+        }
 
-    //CASO O USUÁRIO SEJA VÁLIDO, RETORNA TRUE, CASO CONTRÁRIO, RETORNA FALSE.
-    if(uv){
-        return NextResponse.json({"status":true, "usuario":uv});
+    } else if(info == "cadastro"){
+        const handleLogin = async (email,senha) => {
+    const body = await JSON.parse(file);
+
+    //Sistema de validação de login, retornando um usuário válido, ou undefined caso não encontre.    
+    const usuarioValidado = body.usuarios.find((user) => user.email == email && user.senha == senha);
+
+    return usuarioValidado;
+}
     }
+
+
+
 
     return NextResponse.json({"status":false});
 }
